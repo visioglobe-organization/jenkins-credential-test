@@ -4,7 +4,7 @@ pipeline {
         githubPush()
     }
     environment {
-        MY_API_TOKEN_SECRET = credentials('my-api-token')
+        API_TOKEN = credentials('my-api-token')
     }
     stages {
         stage('Build') {
@@ -17,8 +17,8 @@ pipeline {
             steps {
                 sh '''
                     echo "Using API token..."
-                    echo "Token is: $MY_API_TOKEN_SECRET"
-                    curl -H "Authorization: Bearer $MY_API_TOKEN_SECRET" https://httpbin.org/get || true
+                    echo "Token is: $API_TOKEN"
+                    curl -H "Authorization: Bearer $API_TOKEN" https://httpbin.org/get || true
                 '''
             }
         }
