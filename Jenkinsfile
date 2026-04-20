@@ -5,6 +5,7 @@ pipeline {
     }
     environment {
         API_TOKEN = credentials('my-api-token')
+        TEST_SECRET_TOKEN = credentials('test-secter')
     }
     stages {
         stage('Build') {
@@ -18,6 +19,7 @@ pipeline {
                 sh '''
                     echo "Using API token..."
                     echo "Token is: $API_TOKEN"
+                    echo "TEST Token is: $TEST_SECRET_TOKEN"
                     curl -H "Authorization: Bearer $API_TOKEN" https://httpbin.org/get || true
                 '''
             }
